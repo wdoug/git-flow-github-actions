@@ -3,7 +3,7 @@ name: "Publish new release"
 on:
   pull_request:
     branches:
-      - master
+      - production
     types:
       - closed
 
@@ -40,17 +40,17 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Merge master into dev branch
+      - name: Merge production into dev branch
         uses: thomaseizinger/create-pull-request@1.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          head: master
+          head: production
           base: dev
-          title: Merge master into dev branch
+          title: Merge production into dev branch
           body: |
-            This PR merges the master branch back into dev.
+            This PR merges the production branch back into dev.
             This happens to ensure that the updates that happend on the release branch, i.e. CHANGELOG and manifest updates are also present on the dev branch.
 
-      # if needed, you can checkout the latest master here, build artifacts and publish / deploy them somewhere
+      # if needed, you can checkout the latest production here, build artifacts and publish / deploy them somewhere
       # the create-release action has an output `upload_url` output that you can use to upload assets
