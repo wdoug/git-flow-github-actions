@@ -9,10 +9,12 @@ on:
 
 jobs:
   draft-new-release:
-    name: "Draft a new release"
+    name: "Draft a new release off the dev branch"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: 'dev'
 
       - name: Create release branch
         run: git checkout -b release/${{ github.event.inputs.version }}
