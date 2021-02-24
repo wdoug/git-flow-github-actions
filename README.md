@@ -1,3 +1,5 @@
+> NOTE: This repo was originally forked from https://github.com/thomaseizinger/github-action-gitflow-release-workflow. Due to the way github actions work on forks, however, I decided to switch this to be just a copy instead of a fork.
+
 # GitFlow release workflow using GitHub actions
 
 This repository contains GitHub workflows that allow for fully automated release as per the GitFlow conventions.
