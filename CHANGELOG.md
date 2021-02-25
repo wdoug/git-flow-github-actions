@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.0] - 2021-02-25
+
+-   Demo new release
+
 ## [2.1.0] - 2021-02-24
 
 -   Only support drafting release off `dev` branch
@@ -66,7 +70,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Everything since the beginning!
 
-[Unreleased]: https://github.com/wdoug/git-flow-github-actions/compare/2.1.0...HEAD
+[Unreleased]: https://github.com/wdoug/git-flow-github-actions/compare/2.2.0...HEAD
+
+[2.2.0]: https://github.com/wdoug/git-flow-github-actions/compare/2.1.0...2.2.0
 
 [2.1.0]: https://github.com/wdoug/git-flow-github-actions/compare/2.0.2...2.1.0
 
