@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Get version update type
         run: |
-          if [[ {{ github.event.pull_request.head.ref }} =~ ^release/* ]]; then
+          if [[ ${{ github.event.pull_request.head.ref }} =~ ^release/* ]]; then
             TYPE="minor"
           else
             TYPE="patch"
