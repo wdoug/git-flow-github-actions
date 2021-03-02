@@ -1,15 +1,26 @@
 name: "Create release"
 
 on:
-  push:
+  pull_request:
     branches:
       - production
+    types:
+      - closed
 
 jobs:
   release:
     name: Create release
     runs-on: ubuntu-latest
     steps:
+      - name: Get version update type
+        run: |
+          if [[ {{ github.event.pull_request.head.ref }} =~ ^release/* ]]; then
+            TYPE="minor"
+          else
+            TYPE="patch"
+          fi
+          echo "VERSION_INCREMENT_TYPE=$TYPE" >> $GITHUB_ENV
+
       - name: Checkout repo production branch
         uses: actions/checkout@v2.2.0
         with:
@@ -24,13 +35,12 @@ jobs:
         id: bump-semver
         with:
           current_version: ${{ steps.get-latest-tag.outputs.tag }}
-          level: minor
+          level: ${{ env.VERSION_INCREMENT_TYPE }}
 
       - name: Push new tag
-        uses: actions-ecosystem/action-push-tag@v1
-        with:
-          tag: ${{ steps.bump-semver.outputs.new_version }}
-          message: '${{ steps.bump-semver.outputs.new_version }}: PR #${{ github.event.pull_request.number }} ${{ github.event.pull_request.title }}'
+        run: |
+          git tag ${{ steps.bump-semver.outputs.new_version }} -m ${{ steps.bump-semver.outputs.new_version }}: PR #${{ github.event.pull_request.number }} ${{ github.event.pull_request.title }}
+          git push origin ${{ steps.bump-semver.outputs.new_version }}
 
       - name: Build Changelog
         id: github_release
