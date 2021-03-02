@@ -15,12 +15,6 @@ jobs:
         with:
           ref: 'production'
 
-      - name: Build Changelog
-        id: github_release
-        uses: mikepenz/release-changelog-builder-action@main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Get latest tag version
         uses: actions-ecosystem/action-get-latest-tag@v1
         id: get-latest-tag
@@ -37,6 +31,15 @@ jobs:
         with:
           tag: ${{ steps.bump-semver.outputs.new_version }}
           message: '${{ steps.bump-semver.outputs.new_version }}: PR #${{ github.event.pull_request.number }} ${{ github.event.pull_request.title }}'
+
+      - name: Build Changelog
+        id: github_release
+        uses: mikepenz/release-changelog-builder-action@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          fromTag: ${{ steps.get-latest-tag.outputs.tag }}
+          toTag: ${{ steps.bump-semver.outputs.new_version }}
 
       - name: Create Release
         uses: actions/create-release@v1
