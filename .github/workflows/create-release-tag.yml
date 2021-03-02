@@ -1,22 +1,18 @@
-name: "Bump Release Version"
+name: "Create release tag"
 
 on:
-  pull_request:
+  push:
     branches:
       - production
-    types:
-      - closed
 
 jobs:
   release:
-    name: Bump Release Version
+    name: Create release tag
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true # only merged pull requests must trigger this job
     steps:
       - uses: actions/checkout@v2.2.0
         with:
           ref: 'production'
-          fetch-depth: 0
 
       - uses: actions-ecosystem/action-get-latest-tag@v1
         id: get-latest-tag
