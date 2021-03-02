@@ -7,7 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- Get release version automatically
+## [2.3.0] - 2021-03-01
+
+-   Get release version automatically
+
 ## [2.2.0] - 2021-02-25
 
 -   Demo new release
@@ -71,7 +74,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Everything since the beginning!
 
-[Unreleased]: https://github.com/wdoug/git-flow-github-actions/compare/2.2.0...HEAD
+[Unreleased]: https://github.com/wdoug/git-flow-github-actions/compare/2.3.0...HEAD
+
+[2.3.0]: https://github.com/wdoug/git-flow-github-actions/compare/2.2.0...2.3.0
 
 [2.2.0]: https://github.com/wdoug/git-flow-github-actions/compare/2.1.0...2.2.0
 
