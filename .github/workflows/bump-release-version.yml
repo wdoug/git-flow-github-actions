@@ -38,7 +38,7 @@ jobs:
         run: npm version ${{ env.VERSION_INCREMENT_TYPE }}
 
       - name: Push up new tagged version
-        run: git push --tags
+        run: git push && git push --tags
 
       - name: Open pull request from production back to dev
         uses: thomaseizinger/create-pull-request@1.0.0
