@@ -23,6 +23,11 @@ jobs:
 
           echo "VERSION_INCREMENT_TYPE=$TYPE" >> $GITHUB_ENV
 
+      - uses: actions/checkout@v2.2.0
+        with:
+          ref: 'production'
+          fetch-depth: 0
+
       # In order to make a commit, we need to initialize a user.
       - name: Initialize mandatory git config
         run: |
@@ -33,7 +38,7 @@ jobs:
         run: npm version ${{ env.VERSION_INCREMENT_TYPE }}
 
       - name: Push up new tagged version
-        run: git push
+        run: git push --tags
 
       - name: Open pull request from production back to dev
         uses: thomaseizinger/create-pull-request@1.0.0
