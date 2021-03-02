@@ -4,7 +4,8 @@ on:
     tags:
       - '*'
 
-  release:
+jobs:
+  create-release:
     if: startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
     steps:
