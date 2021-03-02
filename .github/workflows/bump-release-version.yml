@@ -14,14 +14,27 @@ jobs:
     if: github.event.pull_request.merged == true # only merged pull requests must trigger this job
     steps:
       - name: Get version update type
+        # NOTE: These names are a little weird, but that is what the current
+        # action we are using for incrementing the version takes: https://github.com/marketplace/actions/increment-semantic-version
         run: |
           if [[ ${{ github.event.pull_request.head.ref }} =~ ^release/* ]]; then
-            TYPE="minor"
+            TYPE="feature"
           else
-            TYPE="patch"
+            TYPE="bug"
           fi
 
           echo "VERSION_INCREMENT_TYPE=$TYPE" >> $GITHUB_ENV
+
+      - name: 'Get Previous tag version'
+        id: previous_tag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+
+      - name: Get next release version
+        id: next_version
+        uses: christian-draeger/increment-semantic-version@1.0.2
+        with:
+          current-version: ${{ steps.previous_tag.outputs.tag }}
+          version-fragment: ${{ env.VERSION_INCREMENT_TYPE }}
 
       - uses: actions/checkout@v2.2.0
         with:
@@ -35,10 +48,10 @@ jobs:
           git config user.email noreply@github.com
 
       - name: Bump version
-        run: npm version ${{ env.VERSION_INCREMENT_TYPE }}
+        run: npm version ${{ steps.next_version.outputs.next-version }}
 
       - name: Push up new tagged version
-        run: git push --tags
+        run: git push origin production && git push --tags
 
       - name: Open pull request from production back to dev
         uses: thomaseizinger/create-pull-request@1.0.0
