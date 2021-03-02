@@ -13,31 +13,29 @@ jobs:
           ref: 'dev'
           fetch-depth: 0
 
-      - name: 'Get Previous tag version'
-        id: previous_tag
-        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+      - uses: actions-ecosystem/action-get-latest-tag@v1
+        id: get-latest-tag
 
-      - name: Get next release version
-        id: next_version
-        uses: christian-draeger/increment-semantic-version@1.0.2
+      - uses: actions-ecosystem/action-bump-semver@v1
+        id: bump-semver
         with:
-          current-version: ${{ steps.previous_tag.outputs.tag }}
-          version-fragment: 'feature'
+          current_version: ${{ steps.get-latest-tag.outputs.tag }}
+          level: minor
 
       - name: Create release branch
-        run: git checkout -b release/${{ steps.next_version.outputs.next-version }}
+        run: git checkout -b release/${{ steps.bump-semver.outputs.new_version }}
 
       - name: Push new branch
-        run: git push origin release/${{ steps.next_version.outputs.next-version }}
+        run: git push origin release/${{ steps.bump-semver.outputs.new_version }}
 
       - name: Create pull request
         uses: thomaseizinger/create-pull-request@1.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          head: release/${{ steps.next_version.outputs.next-version }}
+          head: release/${{ steps.bump-semver.outputs.new_version }}
           base: production
-          title: Release version ${{ steps.next_version.outputs.next-version }}
+          title: Release version ${{ steps.bump-semver.outputs.new_version }}
           reviewers: ${{ github.actor }} # By default, we request a review from the person who triggered the workflow.
           # Write a nice message to the user.
           # We are claiming things here based on the `publish-new-release.yml` workflow.
