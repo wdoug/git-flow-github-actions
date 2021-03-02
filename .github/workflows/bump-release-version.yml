@@ -13,32 +13,24 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged == true # only merged pull requests must trigger this job
     steps:
-      - name: Get version update type
-        run: |
-          if [[ ${{ github.event.pull_request.head.ref }} =~ ^release/* ]]; then
-            TYPE="minor"
-          else
-            TYPE="patch"
-          fi
-
-          echo "VERSION_INCREMENT_TYPE=$TYPE" >> $GITHUB_ENV
-
       - uses: actions/checkout@v2.2.0
         with:
           ref: 'production'
           fetch-depth: 0
 
-      # In order to make a commit, we need to initialize a user.
-      - name: Initialize mandatory git config
-        run: |
-          git config user.name "GitHub Release Action"
-          git config user.email noreply@github.com
+      - uses: actions-ecosystem/action-get-latest-tag@v1
+        id: get-latest-tag
 
-      - name: Bump version
-        run: npm version ${{ env.VERSION_INCREMENT_TYPE }}
+      - uses: actions-ecosystem/action-bump-semver@v1
+        id: bump-semver
+        with:
+          current_version: ${{ steps.get-latest-tag.outputs.tag }}
+          level: minor
 
-      - name: Push up new tagged version
-        run: git push && git push --tags
+      - uses: actions-ecosystem/action-push-tag@v1
+        with:
+          tag: ${{ steps.bump-semver.outputs.new_version }}
+          message: '${{ steps.bump-semver.outputs.new_version }}: PR #${{ github.event.pull_request.number }} ${{ github.event.pull_request.title }}'
 
       - name: Open pull request from production back to dev
         uses: thomaseizinger/create-pull-request@1.0.0
