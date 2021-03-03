@@ -27,6 +27,15 @@ jobs:
       - name: Push new branch
         run: git push origin release/${{ steps.bump-semver.outputs.new_version }}
 
+      - name: Build Changelog
+        id: github_release
+        uses: mikepenz/release-changelog-builder-action@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          fromTag: ${{ steps.get-latest-tag.outputs.tag }}
+          toTag: HEAD
+
       - name: Create pull request
         uses: thomaseizinger/create-pull-request@1.0.0
         env:
@@ -43,6 +52,9 @@ jobs:
             Hi @${{ github.actor }}!
 
             This PR was created in response to a manual trigger of the release workflow here: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}.
-            I've updated the changelog and bumped the versions in the manifest files in this commit: ${{ steps.make-commit.outputs.commit }}.
 
-            Merging this PR will create a GitHub release and upload any assets that are created as part of the release build.
+            Merging this PR will create a GitHub release.
+
+            Changes included when this pull request was created:
+
+            ${{steps.github_release.outputs.changelog}}
