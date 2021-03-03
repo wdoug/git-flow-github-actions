@@ -14,7 +14,7 @@ on:
 
 jobs:
   test-changelog:
-    name: "Test the changelog between two commits"
+    name: "View the changelog between two commits"
     runs-on: ubuntu-latest
 
     steps:
