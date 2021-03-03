@@ -18,6 +18,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout code to be able to get changelog config
+        uses: actions/checkout@v2.2.0
+
       - name: Build Changelog
         id: github_release
         uses: mikepenz/release-changelog-builder-action@main
