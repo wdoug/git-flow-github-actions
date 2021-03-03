@@ -11,6 +11,10 @@
     {
       "title": "## 🧪 Tests",
       "labels": ["test"]
+    },
+    {
+        "title": "## 📦 Dependencies",
+        "labels": ["dependencies"]
     }
   ],
   "ignore_labels": [
@@ -19,5 +23,8 @@
   "sort": "ASC",
   "template": "${{CHANGELOG}}\n\n<details>\n<summary>Uncategorized</summary>\n\n${{UNCATEGORIZED}}\n</details>",
   "pr_template": "- ${{TITLE}}\n   - PR: #${{NUMBER}}",
-  "empty_template": "- no changes"
+  "empty_template": "- no changes",
+  "exclude_merge_branches": [
+    "dev"
+  ]
 }

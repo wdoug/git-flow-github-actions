@@ -1,0 +1,32 @@
+name: "Test the changelog"
+
+on:
+  workflow_dispatch:
+    inputs:
+      from_commit:
+        description: 'The commit to start building the changelog from'
+        required: true
+        default: 2.5.1
+      to_commit:
+        description: 'The commit to building the changelog up to'
+        required: true
+        default: 2.7.0
+
+jobs:
+  test-changelog:
+    name: "View the changelog between two commits"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Build Changelog
+        id: github_release
+        uses: mikepenz/release-changelog-builder-action@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          configuration: ".github/workflows/release-changelog-config.json"
+          fromTag: ${{ github.event.inputs.from_commit }}
+          toTag: ${{ github.event.inputs.to_commit }}
+
+      - name: "Echo the changelog"
+        run: echo "${{steps.github_release.outputs.changelog}}"
