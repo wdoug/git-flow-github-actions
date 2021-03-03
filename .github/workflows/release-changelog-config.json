@@ -25,6 +25,7 @@
   "pr_template": "- ${{TITLE}}\n   - PR: #${{NUMBER}}",
   "empty_template": "- no changes",
   "exclude_merge_branches": [
-    "dev"
+    "dev",
+    "production"
   ]
 }
