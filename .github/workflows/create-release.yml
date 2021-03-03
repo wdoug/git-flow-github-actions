@@ -48,6 +48,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          configuration: ".github/workflows/release-changelog-config.json"
           fromTag: ${{ steps.get-latest-tag.outputs.tag }}
           toTag: ${{ steps.bump-semver.outputs.new_version }}
 
