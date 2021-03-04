@@ -9,6 +9,7 @@ on:
 
 jobs:
   release:
+    if: github.event.pull_request.merged == true # Only run on merges
     name: Create release
     runs-on: ubuntu-latest
     steps:
