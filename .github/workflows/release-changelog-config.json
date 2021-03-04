@@ -21,8 +21,8 @@
     "ignore"
   ],
   "sort": "DESC",
-  "template": "${{CHANGELOG}}\n\n## Uncategorized Changes\n${{UNCATEGORIZED}}",
-  "pr_template": "- ${{TITLE}} **(#${{NUMBER}})** ${{AUTHOR}}",
+  "template": "## What's Changed\n${{UNCATEGORIZED}}\n${{CHANGELOG}}",
+  "pr_template": "- ${{TITLE}} (#${{NUMBER}}) **@${{AUTHOR}}**",
   "empty_template": "- no changes",
   "exclude_merge_branches": [
     "dev",
