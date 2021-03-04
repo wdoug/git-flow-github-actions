@@ -15,16 +15,21 @@
     {
         "title": "## 📦 Dependencies",
         "labels": ["dependencies"]
+    },
+    {
+      "title": "## 📖 Documentation",
+      "labels": ["documentation"]
     }
   ],
   "ignore_labels": [
     "ignore"
   ],
-  "sort": "ASC",
-  "template": "${{CHANGELOG}}\n\n<details>\n<summary>Uncategorized</summary>\n\n${{UNCATEGORIZED}}\n</details>",
-  "pr_template": "- ${{TITLE}}\n   - PR: #${{NUMBER}}",
+  "sort": "DESC",
+  "template": "## What's Changed\n${{UNCATEGORIZED}}\n${{CHANGELOG}}",
+  "pr_template": "- ${{TITLE}} (#${{NUMBER}}) **@${{AUTHOR}}**",
   "empty_template": "- no changes",
   "exclude_merge_branches": [
-    "dev"
+    "dev",
+    "production"
   ]
 }
