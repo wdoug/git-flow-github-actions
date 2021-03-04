@@ -27,5 +27,19 @@
   "exclude_merge_branches": [
     "dev",
     "production"
+  ],
+  "label_extractor": [
+    {
+      "pattern": "(\\w+)",
+      "target": "$1"
+    },
+    {
+      "pattern": "(Create)",
+      "target": "test"
+    },
+    {
+      "pattern": "(Content)",
+      "target": "dependencies"
+    }
   ]
 }
