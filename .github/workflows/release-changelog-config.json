@@ -17,8 +17,12 @@
         "labels": ["dependencies"]
     },
     {
-      "title": "## 📖 Documentation",
+      "title": "## 📖 Docs",
       "labels": ["documentation"]
+    },
+    {
+      "title": "## 🧹 Chores",
+      "labels": ["chore"]
     }
   ],
   "ignore_labels": [
