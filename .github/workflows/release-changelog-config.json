@@ -15,6 +15,10 @@
     {
         "title": "## 📦 Dependencies",
         "labels": ["dependencies"]
+    },
+    {
+      "title": "## 📖 Documentation",
+      "labels": ["documentation"]
     }
   ],
   "ignore_labels": [
