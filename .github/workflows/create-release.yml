@@ -70,7 +70,10 @@ jobs:
           head: production
           base: dev
           title: Merge production into dev branch
+          reviewers: ${{ github.actor }}
           body: |
+            Hi @${{ github.actor }}!
+
             This PR merges the production branch back into dev.
             This ensures that the updates to production are also present on the dev branch.
 
