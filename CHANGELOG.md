@@ -1,5 +1,7 @@
 # Changelog
 
+Note, this changelog is no longer used for this project. The changelog is now tracked in the github releases itself.
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
