@@ -6,7 +6,7 @@
     },
     {
       "title": "## 🐛 Fixes",
-      "labels": ["BUG"]
+      "labels": ["BUG", "fix"]
     },
     {
       "title": "## 🧪 Tests",
@@ -32,6 +32,11 @@
     {
       "pattern": "(\\w+)",
       "target": "$1",
+      "on_property": "title"
+    },
+    {
+      "pattern": "^Fix",
+      "target": "fix",
       "on_property": "title"
     },
     {
