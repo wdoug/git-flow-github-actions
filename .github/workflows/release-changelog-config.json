@@ -31,15 +31,18 @@
   "label_extractor": [
     {
       "pattern": "(\\w+)",
-      "target": "$1"
+      "target": "$1",
+      "on_property": "title"
     },
     {
       "pattern": "(Create)",
-      "target": "test"
+      "target": "test",
+      "on_property": "title"
     },
     {
       "pattern": "(Content)",
-      "target": "dependencies"
+      "target": "dependencies",
+      "on_property": "title"
     }
   ]
 }
