@@ -10,7 +10,7 @@ on:
       to_commit:
         description: 'The commit to building the changelog up to'
         required: true
-        default: 2.7.0
+        default: 2.12.0
 
 jobs:
   test-changelog:
