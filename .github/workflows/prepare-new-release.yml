@@ -56,6 +56,6 @@ jobs:
 
             Merging this PR will create a GitHub release.
 
-            Changes included when this pull request was created:
+            Changes included when this pull request was initially created:
 
             ${{steps.github_release.outputs.changelog}}
