@@ -1,6 +1,6 @@
 > NOTE: This repo was originally forked from https://github.com/thomaseizinger/github-action-gitflow-release-workflow. Due to the way github actions work on forks, however, I decided to switch this to be just a copy instead of a fork.
 
-At this point, however, it has diverged pretty significantly from the original.
+At this point, however, it has completely diverged from the original.
 
 # GitFlow release workflow using GitHub actions
 
