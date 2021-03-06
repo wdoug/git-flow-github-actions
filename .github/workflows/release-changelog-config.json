@@ -13,8 +13,8 @@
       "labels": ["test"]
     },
     {
-        "title": "## 📦 Dependencies",
-        "labels": ["dependencies"]
+      "title": "## 📦 Dependencies",
+      "labels": ["dependencies"]
     },
     {
       "title": "## 📖 Docs",
@@ -25,15 +25,10 @@
       "labels": ["chore"]
     }
   ],
-  "ignore_labels": [
-    "ignore"
-  ],
+  "ignore_labels": ["ignore"],
   "sort": "DESC",
   "template": "## What's Changed\n${{UNCATEGORIZED}}\n${{CHANGELOG}}",
   "pr_template": "- ${{TITLE}} (#${{NUMBER}}) **@${{AUTHOR}}**",
   "empty_template": "- no changes",
-  "exclude_merge_branches": [
-    "dev",
-    "production"
-  ]
+  "exclude_merge_branches": ["production"]
 }
