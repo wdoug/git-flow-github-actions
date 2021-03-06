@@ -14,8 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get version update type
+        # NOTE: Using intermediary variable for security best practices
+        # See: https://securitylab.github.com/research/github-actions-untrusted-input
+        env:
+          BRANCH: ${{ github.event.pull_request.head.ref }}
         run: |
-          if [[ ${{ github.event.pull_request.head.ref }} =~ ^release/* ]]; then
+          if [[ $BRANCH =~ ^release/* ]]; then
             TYPE="minor"
           else
             TYPE="patch"
