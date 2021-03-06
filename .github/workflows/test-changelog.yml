@@ -32,4 +32,8 @@ jobs:
           toTag: ${{ github.event.inputs.to_commit }}
 
       - name: "Echo the changelog"
-        run: echo "${{steps.github_release.outputs.changelog}}"
+        # NOTE: Using intermediary variable for security best practices and
+        # proper formatting
+        env:
+          CHANGELOG: ${{steps.github_release.outputs.changelog}}
+        run: echo "$CHANGELOG"
