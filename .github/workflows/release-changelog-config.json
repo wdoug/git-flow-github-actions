@@ -23,6 +23,10 @@
     {
       "title": "## 🧹 Chores",
       "labels": ["chore"]
+    },
+    {
+      "title": "🔒 Security",
+      "labels": ["security"]
     }
   ],
   "ignore_labels": ["ignore"],
