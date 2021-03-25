@@ -44,7 +44,7 @@ jobs:
         with:
           head: release/${{ steps.bump-semver.outputs.new_version }}
           base: production
-          title: Release version ${{ steps.bump-semver.outputs.new_version }}
+          title: "Release: Version ${{ steps.bump-semver.outputs.new_version }}"
           reviewers: ${{ github.actor }} # By default, we request a review from the person who triggered the workflow.
           # Write a nice message to the user.
           # We are claiming things here based on the `publish-new-release.yml` workflow.
