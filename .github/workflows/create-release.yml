@@ -43,7 +43,7 @@ jobs:
         uses: oprypin/find-latest-tag@v1
         with:
           # Reference this own repository
-          repository: "{{ github.event.repository.full_name }}"
+          repository: "${{ github.event.repository.full_name }}"
         id: get-latest-tag
 
       - name: Get next tag version
