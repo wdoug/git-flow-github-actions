@@ -40,7 +40,10 @@ jobs:
           toTag: HEAD
 
       - name: Get latest tag version
-        uses: actions-ecosystem/action-get-latest-tag@v1
+        uses: oprypin/find-latest-tag@v1
+        with:
+          # Reference this own repository
+          repository: "{{ github.event.repository.full_name }}"
         id: get-latest-tag
 
       - name: Get next tag version
