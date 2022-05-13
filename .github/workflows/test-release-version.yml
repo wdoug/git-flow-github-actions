@@ -1,0 +1,48 @@
+name: "Test release version"
+# To debug things in case we have an issue like this again: https://github.com/actions-ecosystem/action-get-latest-tag/issues/13
+
+on:
+  workflow_dispatch
+
+jobs:
+  test-release-version:
+    name: "Test release version"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: 'dev'
+
+      - uses: actions-ecosystem/action-get-latest-tag@v1
+        with:
+          semver_only: true
+        id: get-latest-tag
+
+      - run: |
+          echo "From actions-ecosystem/action-get-latest-tag: $LATEST_RELEASE"
+        env:
+          LATEST_RELEASE: ${{ steps.get-latest-tag.outputs.tag }}
+
+      # Try getting the latest release version directly via bash
+      # This is assuming we're only looking at tags that match the grep regex
+      - run: |
+          RELEASE="$(git tag --sort=-v:refname | grep -E '^[0-9\.]+$' | head -n 1)"
+          echo "LATEST_RELEASE=$RELEASE" >> $GITHUB_ENV
+
+      - run: |
+          echo "From bash: $LATEST_RELEASE"
+        env:
+          LATEST_RELEASE: ${{ env.LATEST_RELEASE }}
+
+      - name: Get next patch tag version
+        uses: actions-ecosystem/action-bump-semver@v1
+        id: bump-semver
+        with:
+          current_version: ${{ env.LATEST_RELEASE }}
+          level: patch
+
+      - name: Get latest tag version
+        uses: oprypin/find-latest-tag@v1
+        with:
+          # Reference this repository
+          repository: "${{ github.event.repository.full_name }}"
