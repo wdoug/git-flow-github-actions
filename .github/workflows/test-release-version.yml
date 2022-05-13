@@ -34,15 +34,14 @@ jobs:
         env:
           LATEST_RELEASE: ${{ env.LATEST_RELEASE }}
 
-      - name: Get next patch tag version
-        uses: actions-ecosystem/action-bump-semver@v1
-        id: bump-semver
-        with:
-          current_version: ${{ env.LATEST_RELEASE }}
-          level: patch
-
-      - name: Get latest tag version
+      - name: Get latest tag version from oprypin/find-latest-tag
         uses: oprypin/find-latest-tag@v1
         with:
           # Reference this repository
           repository: "${{ github.event.repository.full_name }}"
+        id: find-latest-tag
+
+      - run: |
+          echo "From oprypin/find-latest-tag: $LATEST_RELEASE"
+        env:
+          LATEST_RELEASE: ${{ steps.find-latest-tag.outputs.tag }}
