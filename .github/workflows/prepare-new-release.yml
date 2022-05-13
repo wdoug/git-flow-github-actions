@@ -12,7 +12,11 @@ jobs:
         with:
           ref: 'dev'
 
-      - uses: actions-ecosystem/action-get-latest-tag@v1
+      - name: Get latest tag version
+        uses: oprypin/find-latest-tag@v1
+        with:
+          # Reference this repository
+          repository: "${{ github.event.repository.full_name }}"
         id: get-latest-tag
 
       - uses: actions-ecosystem/action-bump-semver@v1
